@@ -20,6 +20,8 @@ RSpec::Core::RakeTask.new("spec:dev") do |t|
   t.rspec_opts = "-r #{File.expand_path(pg_runner, __dir__)}"
 end
 
-task :default do
-  Rake::Task["spec#{':ci' if ENV['CI']}"].invoke
-end
+# task :default do
+#   Rake::Task["spec#{':ci' if ENV['CI']}"].invoke
+# end
+
+task :default => :spec
