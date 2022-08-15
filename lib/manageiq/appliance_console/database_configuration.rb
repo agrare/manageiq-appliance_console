@@ -239,7 +239,12 @@ FRIENDLY
     def start_evm
       pid = fork do
         begin
-          LinuxAdmin::Service.new("evmserverd").start(true)
+          evmserverd = LinuxAdmin::Service.new("evmserverd")
+          if evmserverd.running?
+            evmserverd.restart
+          else
+            evmserverd.start(true)
+          end
         rescue => e
           logger.error("Failed to enable and start evmserverd service: #{e.message}")
           logger.error(e.backtrace.join("\n"))
