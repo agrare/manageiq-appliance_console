@@ -109,7 +109,7 @@ Replication Server Configuration
 
     def run_repmgr_command(cmd, params = {})
       pid = fork do
-        Process::UID.change_privilege(Process::UID.from_name("postgres"))
+        #Process::UID.change_privilege(Process::UID.from_name("postgres"))
         begin
           res = AwesomeSpawn.run!(cmd, :params => params, :env => {"PGPASSWORD" => database_password})
           say(res.output)
